@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load CustomFiltros %}
+
+
+{% block title%}<title>Principal</title>{% endblock %}
+
+
+{% block Head %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/entrada.css' %}">
+
+</head>
+{% endblock %}
+
+{% block content %}
+    <main class="col-md-10 content">
+            <div class="filter-bar">
+                <a onclick="adicionarParametro('curso', 'TI')" class="filter">Informática</a>
+                <a onclick="adicionarParametro('curso', 'PDG')" class="filter">Pedagogia</a>
+                <a onclick="adicionarParametro('tipo', 'Evento')"class="filter">Eventos</a>
+                <a onclick="adicionarParametro('tipo', 'Palestra')" class="filter">Palestras</a>
+                <a href="?" class="filter">Todos</a>
+            </div>
+            <div>
+                {%for filtro in Filtros%}
+                    {%if filtro%}
+                    <small class="text-secondary">{{filtro}}</small>
+                    {%endif%}
+                {%endfor%}
+            </div>
+
+        <div id="palestras-list" class="palestras-list">
+            <div id="event-list" class="mt-4">
+                {% for Evento in Lista_Eventos %}
+                    <div class="card {{Evento.curso}} my-2">
+                        <h5 class="card-titulo">{{Evento.titulo}} </h5>
+                        <p class="card-tema"> {{Evento.tema}}</p> 
+                        <p class="card-descricao">{{Evento.descricao}}</p>
+                        <p class="card-curso">{{Evento.curso}}</p>
+                        <span class="card-data">{{Evento.dt_inicio | date:"d F Y"}} - {{Evento.dt_fim | date:"d  F Y" }}</span>
+                        <small>{{Evento.dt_inicio|naturaltime }}</small>
+
+                        <div class="acoes">
+                            {% with uid=Evento.id|UID %}
+                                {% if user.is_superuser %}
+                                    {% if Evento.tipo == "Evento" %}
+                                        <button class="Editar bg-danger"><a class="text-light"href="{% url 'Evento' uidb64=uid %}">Editar</a></button>
+                                    {% elif Evento.tipo == "Palestra" %}
+                                        <button class="Editar bg-danger"><a class="text-light" href="{% url 'Palestra' uidb64=uid %}">Editar</a></button>
+                                    {% endif %}
+                                {% endif %}
+
+                            
+                            <button class="inscreva-se"><a class="text-light"href="{% url 'Inscrever' uidb64=uid %}">Inscreva-se</a></button>
+                            <button class="saiba-mais" onclick="window.location.href='{% url "detalhes" uidb64=uid %}';">Saiba mais</button>
+                            {% endwith %}
+                        </div>
+                        
+                        <div class="saiba_mais hidden">
+                            <h5 class="card-text">Programação</h5>
+                            {% for cronograma in Evento.cronogramas.all %}
+                            <div>
+                                <ul>
+                                    <li><p>{{cronograma.assunto}} {{cronograma.data_hora_inicio}}-{{cronograma.data_hora_fim}} </p></li>
+                                    <li><p>{{cronograma.local}}</p></li>
+                                </ul>
+                                <p class="card-title">{{cronograma.assunto}} {{cronograma.data_hora_inicio}}-{{cronograma.data_hora_fim}} </p>
+                                <p class="card-text">local: {{cronograma.local}}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+                
+        <script src={% static 'js/Entrada.js' %}></script>
+        <script>
+           
+    </script>
+    </main>
+{% endblock %}
+
+
+<!--https://docs.djangoproject.com/en/5.1/howto/custom-template-tags/
+-->

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div >
+    <form method="post" class="A">
+        {% csrf_token %}
+        <div class="Informacoes ativo">
+            {{ Eventoform.titulo.label}}
+            {{ Eventoform.titulo}}
+            {{ Eventoform.tema.label}}
+            {{ Eventoform.tema}}
+            {{ Eventoform.curso.label}}
+            {{ Eventoform.curso}}
+        </div>
+        <div class="Palestra">
+            {{Palestrasform.tituloPalestra.label}}
+            {{Palestrasform.tituloPalestra}}
+            {{Palestrasform.descricaoPalestra.label}}
+            {{Palestrasform.descricaoPalestra}}
+            {{Palestrasform.palestrante.label}}
+            {{Palestrasform.palestrante}}
+            {{Palestrasform.breve_curriculo.label}}
+            {{Palestrasform.breve_curriculo}}
+            
+        </div>
+        <div class="Cronograma">
+            {{Cronogramaform.Assunto.label}}
+            {{Cronogramaform.Assunto}}
+            {{Cronogramaform.Local.label}}
+            {{Cronogramaform.Local}}
+            {{Cronogramaform.DT_Hora_inicio.label}}
+            {{Cronogramaform.DT_Hora_inicio}}
+            {{Cronogramaform.DT_Hora_fim.label}}
+            {{Cronogramaform.DT_Hora_fim}}
+            
+        </div>
+        <div class="Configuracao">
+            {{Eventoform.dt_inicio.label}}
+            {{Eventoform.dt_inicio}}
+            {{Eventoform.dt_fim.label}}
+            {{Eventoform.dt_fim}}
+            {{Eventoform.dt_inicio_inscricao.label}}
+            {{Eventoform.dt_inicio_inscricao}}
+            {{Eventoform.dt_fim_inscricao.label}}
+            {{Eventoform.dt_fim_inscricao}}
+            {{Eventoform.perc_necess_cert.label}}
+            {{Eventoform.perc_necess_cert}}
+            {{Eventoform.cert_por_palestra.label}}
+            {{Eventoform.cert_por_palestra}}
+            <button type="submit">Enviar</button>
+            
+        </div>
+    
+        <button type="button">Next</button>
+        
+    </form>    
+</div>
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

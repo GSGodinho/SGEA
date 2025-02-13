@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    margin: 0;
+    background-color: #f0f0f0;
+    color: #333;
+    height: 100vh; /* Ajustar altura para 100% da janela */
+    overflow: hidden; /* Evitar barras de rolagem desnecessárias */
+   
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.logo {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #ddd;
+}
+
+.user-options a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.content {
+    flex: 1;
+    padding: 20px; /* Reduzido para otimizar espaço */
+    overflow-y: auto; /* Permitir apenas rolagem vertical */
+    max-height: 100vh; /* Garantir altura limitada à tela */
+    max-width: calc(100vw - 200px); /* Subtrair a largura da sidebar */
+    box-sizing: border-box; /* Incluir padding e borda no tamanho */
+    margin-left: auto;
+    
+}
+
+.filter-bar {
+    top: 0;
+    left: 200px;
+    width: calc(100% - 200px);
+    background-color: #f0f0f0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: margin-left 0.3s ease;
+}
+
+.filter {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+.filter:hover {
+    background-color: #0056b3;
+}
+
+.palestras-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-right: 100px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.TI {
+    background: linear-gradient(135deg, #3e5eec, #a6bcf8);
+}
+
+.PDG {
+    background: linear-gradient(135deg, #7b1fa2, #ba68c8);
+}
+
+.eventos {
+    background: linear-gradient(135deg, #0abe46, #a0ffd3);
+}
+
+.card-titulo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #fff;
+}
+
+.card-descricao {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.card-data {
+    font-size: 0.9em;
+    color: #ddd;
+}
+
+.acoes {
+    margin-top: 10px;
+}
+
+.saiba-mais, .inscreva-se, .inscrito, .Editar {
+    background-color: #333;
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.saiba-mais:hover, .inscreva-se:hover, .inscrito:hover {
+    background-color: #555;
+}
+
+.inscrito {
+    background-color: #0047AB;
+}
+
+.inscrito:hover {
+    background-color: #003580;
+}
+
+.inscreva-se {
+    background-color: #28a745;
+}
+
+.inscreva-se:hover {
+    background-color: #218838;
+}
+
+.Editar {
+    background-color: #dc3545;
+}
+
+.Editar:hover {
+    background-color: #c82333;
+}

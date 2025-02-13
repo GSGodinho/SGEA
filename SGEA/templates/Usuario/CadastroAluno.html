@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/CadastroUsuario.css' %}">
+    <title>ISEPAM Eventos</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="{% static 'img/logo.png' %}" alt="Logo ISEPAM" class="logo">
+        </header>
+
+        <div class="content">
+            <div class="text-section">
+                <h1>Isepam Eventos</h1>
+                <p class="subtitulo">acesso fácil a educação</p>
+                <p class="descricao">O ISEPAM valoriza a importância de facilitar o acesso a eventos acadêmicos, democratizando a educação e ampliando as oportunidades de aprendizado para todos.</p>
+            </div>
+
+            <div class="form-container">
+                <div class="toggle-buttons">
+                    <button id="alunoBtn" class="active" onclick="window.location.href='{% url "CadastroAluno" %}';">Aluno</button>
+                    <button id="visitanteBtn"" onclick="window.location.href='{% url "CadastroVisitante" %}';">Visitante</button>
+                </div>
+
+                <form id="alunoForm" class="form active" method="post">
+                    {% csrf_token %}
+                    {{ alunoform.as_p }}
+                    <button type="submit" name="alunoBtn">CADASTRAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

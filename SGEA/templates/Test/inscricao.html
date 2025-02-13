@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} 
+    <button type="submit">Enviar</button>
+</form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block Head %}
+
+{% endblock %}
+{% block content %}
+<main class="container m-auto">
+    <button onclick="javascript:history.back()" class="btn btn-primary ">Voltar</button>
+    <div class="m-auto p-4">
+        <h1>Apagar Evento</h1>
+        <p>Insira suas Credenciais,para apagar o evento<p>
+        <form method="post">
+            {% csrf_token %}
+            {{ loginform.as_p }}
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %} 
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+    
+    
+</main>
+
+{% endblock %}

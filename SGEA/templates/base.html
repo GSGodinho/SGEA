@@ -1,0 +1,84 @@
+{% load static %}
+{% load CustomFiltros %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" contente="IE=edge">
+    <meta name = "viemport" content="widht=device-width, initicial-scale=1.0">
+    {% block title %}<title>Página Principal</title>{% endblock %}
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"></link>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    {%block Head%}
+
+    {%endblock%}
+    
+  </head>
+  <body>
+      <div class="navegacao">
+        <ul>
+          <li class="list">
+            <a href="#">
+              <span class="icone"><ion-icon name="menu"></ion-icon><span>
+            </a>
+          <li>
+          <li class="list ativo">
+            <a href="{% url 'Entrada' %}">
+              <span class="icone"><ion-icon name="home"></ion-icon></span>
+              <span class="titulo">Home</span>
+            </a>
+          </li>
+          {% if user.is_superuser %}
+              <li class="list">
+                <a href= "{% url 'Evento' uidb64=0|UID %} ">
+                  <span class="icone"><ion-icon name="school"></ion-icon></span>
+                  <span class="titulo">Evento</span>
+                </a>
+              </li>
+              <li class="list">
+                <a href= "{% url 'Palestra' uidb64=0|UID %} ">
+                  <span class="icone"><ion-icon name="school"></ion-icon></span>
+                  <span class="titulo">Palestra</span>
+                </a>
+              </li>
+          {% endif %}
+          <!--
+                    <li class="list">
+            <a href="#">
+              <span class="icone"><ion-icon name="document-text-outline"></ion-icon></span>
+              <span class="titulo">Certificados</span>
+            </a>
+          </li>
+          
+          -->
+ 
+          <li class="list">
+            <a href="{% url 'inscricoes' %}">
+              <span class="icone"><ion-icon name="easel"></ion-icon></span>
+              <span class="titulo">Inscrições</span>
+            </a>
+          </li>
+  
+
+          <li class="list">
+            <a href="{% url 'usuarioDetalhes' %}">
+              <span class="icone"><ion-icon name="person"></ion-icon></span>
+              <span class="titulo">Usuário</span>
+            </a>
+          </li>
+
+
+
+        </ul>
+      </div>
+      {%block content%}
+
+      {%endblock%}
+
+
+      <script src="{% static "js/base.js" %}"></script>
+
+  </body>
+</html>

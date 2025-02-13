@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}<title>Já Inscrito</title>{% endblock %}
+{%block content%}
+<div class="container">
+    <h1>Você já está inscrito nesse Evento</h1>
+    <h2 class="card-titulo">{{Evento.titulo}} </h2>
+    <span class="card-data">{{Evento.dt_inicio | date:"d F Y"}} - {{Evento.dt_fim | date:"d  F Y" }}</span>
+</div>
+
+{%endblock%}

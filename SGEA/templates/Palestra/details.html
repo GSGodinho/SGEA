@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load CustomFiltros %}
+{% load static %}
+
+{% block Head %}
+    <head>
+
+        {% block title %}<title>Detalhes {{Evento}}</title>{% endblock %}
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/details.css' %}">
+        
+    </head>
+{% endblock %}
+{% block content %}
+<main class="col-md-10 content">
+    <div class="event-container">
+        <h1 class="event-title">{{ Evento }}</h1>
+        <p class="event-description">{{ Evento.descricao }}</p>
+        
+        <div class="event-details">
+            <h3>Detalhes</h3>
+            <p><strong>Data:</strong>  {{Evento.dt_inicio | date:"d F Y"}}</p>
+            <p><strong>Hora de Início:</strong> {{ Evento.dt_inicio }}</p>
+            <p><strong>Hora de Término:</strong>  {{ Evento.dt_fim }}</p>
+            <p><strong>Curso:</strong> {{ Evento.curso }}</p>
+        </div>
+        
+
+        <div class="event-schedule">
+            <h3>Cronograma</h3>
+            {% for cronograma in Cronogramas %}
+            <div class="schedule-item">
+                <h5>{{ cronograma.assunto }}</h5>
+                <p><strong>Horário:</strong> {{ cronograma.data_hora_inicio }} - {{ cronograma.data_hora_fim }}</p>
+                <p><strong>Local:</strong> {{ cronograma.local }}</p>
+
+            </div>
+        {% endfor %}
+        <div class="event-schedule">
+            <h3>Sessões</h3>
+            {% for sessao in Sessoes %}
+                <div class="schedule-item">
+                    <h5>{{ sessao.titulo }}</h5>
+                    <p><strong>Palestrante:</strong> {{ sessao.cronograma.local }}</p>
+                    <p><strong>Horário:</strong> {{ sessao.cronograma.data_hora_inicio }} - {{ sessao.cronograma.data_hora_fim }}</p>
+                    <p><strong>Local:</strong> {{ sessao.cronograma.local }}</p>
+                    
+        
+                </div>
+            {% endfor %}
+    
+
+    </div>
+
+ 
+
+</div>
+
+    {% if user.is_superuser %}
+    <section class="qr-code-section">
+        <h3>Obtenha o QR Code do Evento</h3>
+        <p>Clique no botão abaixo para gerar o QR Code do evento para confirmação de presença!</p>
+        {% with uid=Evento.id|UID%}
+        <a target="_blank" class="qr-code-link" href="{% url 'qrCode' uidb64=uid %}">Clique para Gerar o QR Code</a>
+        {% endwith %}
+    {% endif %}
+</section>
+</div>
+</main>
+{% endblock %}

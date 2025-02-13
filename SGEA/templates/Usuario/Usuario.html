@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container bg-light p-3 w-25"> 
+    <span class="icone"><ion-icon class="w-100"name="person" ></ion-icon></span>
+    <p class="titulo text-center" >{{user.username}}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ userform.as_table }}
+        {{ externoform.as_table }}
+        {% if messages %}
+
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} 
+        <button type="submit" class="form-control">Editar</button>
+    </form>
+</div>
+
+{% endblock %}

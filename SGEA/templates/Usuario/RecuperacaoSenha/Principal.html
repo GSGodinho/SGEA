@@ -1,0 +1,17 @@
+{% extends "Usuario/RecuperacaoSenha/base.html" %}
+
+{% block content %}
+
+<form method="post">
+
+    <h2>Recuperar Senha</h2>
+    <p>Insira sua Nova Senha</p>
+
+    {% csrf_token %}
+    {{ form.as_div }}
+
+    <button class="form-control w-50 mx-auto" type="submit">Enviar</button>
+</form>
+
+
+{% endblock %}

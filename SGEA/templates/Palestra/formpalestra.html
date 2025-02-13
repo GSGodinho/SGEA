@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load CustomFiltros %}
+{% load static %}
+
+{% block Head %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"></link>
+</head>
+{% endblock %}
+
+{% block content %}
+<body>
+    <!-- Container principal -->
+    <div class="container mt-5">
+        <!-- Cabeçalho -->
+        <div class="text-center mb-4">
+            <h1>Cadastro de Palestras</h1>
+            <p>Siga os passos para cadastrar sua palestra.</p>
+        </div>
+
+
+        <!-- Formulário com várias etapas -->
+        <form id="form-cadastro-palestra" method="post">
+            {% csrf_token %}
+            <!-- Passo 1: Informações Palestra -->
+            <div class="step" id="step-1">
+
+                <h3>Informações Palestra</h3>
+                <div>
+                    {{Palestraform.id}}
+                </div>
+                <div>
+                    {{Palestraform.id_sessao}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.titulo.label_tag}}
+                    {{Palestraform.titulo}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.tema.label_tag}}
+                    {{Palestraform.tema}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.descricao.label_tag}}
+                    {{Palestraform.descricao}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.curso.label_tag}}
+                    {{Palestraform.curso}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.id_cronograma}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.data.label_tag}}
+                    {{Palestraform.data}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.hora_inicio.label_tag}}
+                    {{Palestraform.hora_inicio}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.hora_fim.label_tag}}
+                    {{Palestraform.hora_fim}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.local.label_tag}}
+                    {{Palestraform.local}}
+                </div>
+            </div>
+
+            <!-- Passo 2:Informações Palestrante  -->
+            <div class="step" id="step-2">
+                <h3>Informações do Palestrante</h3>
+
+                <div class="mb-3">
+                    {{Palestraform.id_palestrante}}
+                </div>
+
+                <div class="mb-3">
+                    {{Palestraform.nomePalestrante.label_tag}}
+                    {{Palestraform.nomePalestrante}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.breve_curriculo.label_tag}}
+                    {{Palestraform.breve_curriculo}}
+                </div>
+            </div>  
+
+            <!-- Passo 3: cronograma -->
+            <div class="step" id="step-3">
+                <h3>Cronograma</h3>
+
+                <div class="mb-3">
+                    <div class="cronograma-container">
+                        <!-- Primeiro bloco do cronograma -->
+                            <input type='hidden' class="prefix" value={{ Cronogramaform.prefix }}></input>
+                            {{Cronogramaform.management_form}}
+                            <div class="hidden modelo-form">{{Cronogramaform.empty_form.as_div}}</div>
+
+                            {% for form in Cronogramaform %}
+                            <div class="cronograma-bloco">
+                                {{ form.as_div}}
+                            </div>
+                            {% endfor %}
+                    </div>
+                    <!-- Botão para adicionar novo cronograma -->
+                    <button type="button" onclick="AdicionarNovo('{{Cronogramaform.prefix}}',this)">+</button>
+                
+                </div>
+            </div>
+       
+
+                      <!-- Passo 2:Informações Sessão  -->
+            <div class="step" id="step-4">
+                {% with uid=Palestraform.id.value|UID %}
+                <button class="bg-danger" type="button"><a class="text-light" href="{% url 'Delete' uidb64=uid %}">Apagar</a></button>
+                {% endwith %}
+                <h3>Configurações</h3>
+                
+                <div class="mb-3">
+                   {{Palestraform.dt_inicio_inscricao.label_tag}}
+                   {{Palestraform.dt_inicio_inscricao}}
+                </div>
+                <div class="mb-3">
+                    {{Palestraform.dt_fim_inscricao.label_tag}}
+                    {{Palestraform.dt_fim_inscricao}}
+                 </div>
+                 <div class="mb-3">
+                    {{Palestraform.limite_inscricao.label_tag}}
+                    {{Palestraform.limite_inscricao}}
+                 </div>
+
+            </div>  
+                
+             
+            <!-- Navegação entre passos -->
+            <div class="text-center mt-4">
+                <button type="button" class="btn btn-secondary" id="prev-btn" onclick="prevStep()">Anterior</button>
+                <button type="button" class="btn btn-primary" id="next-btn" onclick="nextStep()">Próximo</button>
+                <button type="submit" class="btn btn-success" id="submit-btn" style="display: none;">Salvar Palestra</button>
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <!-- Scripts Bootstrap e customizados -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/cronograma.js' %}"></script>
+</body>
+</html>
+{% endblock %}

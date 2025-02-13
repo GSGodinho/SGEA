@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" contente="IE=edge">
+    <meta name = "viemport" content="widht=device-width, initicial-scale=1.0">
+    {% block title %}<title>Recuperação de Senha</title>{% endblock %}
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"></link>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    
+  </head>
+  <body>
+      <div class="container bg-light p-4 w-25" style="border-radius: 2%;">
+
+        {%block content%}
+
+        {%endblock%}
+
+      </div>
+
+      <script src="{% static "js/base.js" %}"></script>
+
+  </body>
+</html>
